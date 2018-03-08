@@ -11,6 +11,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $fillable = ['username', 'password'];
 
+	public static $rules = ['username'=>'required', 'password'=>'required'];
+
+	public static $messages;
+
+	public static function isValid($data)
+	{
+		$validation = Validator::make($data, User::$rules);
+
+		if ($validation->passes())
+		{
+			return true;
+		}
+
+		static::$messages = $validation->messages();
+
+		return false;
+	}
+
 	use UserTrait, RemindableTrait;
 
 	/**

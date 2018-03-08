@@ -26,6 +26,12 @@ class CricketersController extends \BaseController {
 
 	public function store()
 	{
+
+		if (! Cricketer::isValid(Input::all()))
+        {
+        	return Redirect::back()->withInput()->withErrors(Cricketer::$messages);
+        }
+
 		$cricketer = new Cricketer;
 
 		$cricketer->name = Input::get('name');

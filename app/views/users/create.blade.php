@@ -15,6 +15,7 @@
     <div>
       {{ Form::label('password', 'Password:') }}
       {{ Form::input('text', 'password') }}
+      {{ $errors->first('password') }}
     </div>
 
     <div> {{ Form::submit('Create User') }} </div>
