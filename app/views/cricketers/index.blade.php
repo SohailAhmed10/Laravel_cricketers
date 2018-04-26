@@ -8,4 +8,6 @@
       <li> {{ link_to("/cricketers/{$cricketer->name}", $cricketer->name) }} </li>
     @endforeach
 
+    <p>{{ link_to_route('cricketers.create', 'Add the cricketer with next most sixes') }}</p>
+
 @stop

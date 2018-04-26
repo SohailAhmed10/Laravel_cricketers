@@ -12,15 +12,15 @@ class Cricketer extends Eloquent {
 	public $timestamps = false;
 	protected $table = 'cricketers';
 
-	public static $rules = ['name'=>'required', 'number_of_sixes'=>'required', 'age'=>'required', 'shirt_number'=>'required'];
+	public static $rules = ['name'=>'required', 'number_of_sixes'=>'required', 'number_of_matches'=>'required', 'age'=>'required'];
 
 	protected $fillable = array(
-        'name', 'shirt_number',
+        'name', 'number_of_matches',
         'number_of_sixes', 'age');
 
-	public static $messages;
+	public $messages;
 
-	public static function isValid($data)
+	public function isValid($data)
 	{
 		$validation = Validator::make($data, Cricketer::$rules);
 
@@ -29,7 +29,7 @@ class Cricketer extends Eloquent {
 			return true;
 		}
 
-		static::$messages = $validation->messages();
+		$this->messages = $validation->messages();
 
 		return false;
 	}

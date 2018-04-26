@@ -13,18 +13,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules = ['username'=>'required', 'password'=>'required'];
 
-	public static $messages;
+	public $messages;
 
-	public static function isValid($data)
+	public function isValid($data)
 	{
-		$validation = Validator::make($data, User::$rules);
+		$validation = Validator::make($data, static::$rules);
 
 		if ($validation->passes())
 		{
 			return true;
 		}
 
-		static::$messages = $validation->messages();
+		$this->messages = $validation->messages();
 
 		return false;
 	}

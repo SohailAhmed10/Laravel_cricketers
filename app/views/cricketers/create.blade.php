@@ -20,17 +20,19 @@
       {{ $errors->first('number_of_sixes') }}
     </div>
 
+        <div>
+      {{ Form::label('number_of_matches', 'Number of Matches:') }}
+      {{ Form::input('number', 'number_of_matches') }}
+      {{ $errors->first('number_of_matches') }}
+    </div>
+
     <div>
       {{ Form::label('age', 'Age:') }}
       {{ Form::input('number', 'age') }}
       {{ $errors->first('age') }}
     </div>
 
-    <div>
-      {{ Form::label('shirt_number', 'Shirt Number:') }}
-      {{ Form::input('number', 'shirt_number') }}
-      {{ $errors->first('shirt_number') }}
-    </div>
+
 
     <div> {{ Form::submit('Add Player') }} </div>
 

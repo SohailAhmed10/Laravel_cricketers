@@ -7,15 +7,21 @@ class CricketersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
+	public function __construct(Cricketer $cricketer)
+	{
+		$this->cricketer = $cricketer;
+	}
+
 	public function index()
 	{
-		$cricketers = Cricketer::all();
+		$cricketers = $this->cricketer->all();
 		return View::make('cricketers.index')->with('cricketers', $cricketers);
 	}
 
 	public function show($name)
 	{
-		$cricketer = Cricketer::where('name', '=', $name)->first();
+		$cricketer = $this->cricketer->where('name', '=', $name)->first();
 		return View::make('cricketers.show')->with('cricketer', $cricketer);
 	}
 
@@ -26,12 +32,16 @@ class CricketersController extends \BaseController {
 
 	public function store()
 	{
+		$this->cricketer->fill(Input::all());
 
-		if (! Cricketer::isValid(Input::all()))
+		if (! $this->cricketer->isValid($input = Input::all()))
         {
-        	return Redirect::back()->withInput()->withErrors(Cricketer::$messages);
+        	return Redirect::back()->withInput()->withErrors($this->cricketer->messages);
         }
 
+        $this->cricketer->create($input);
+
+		/**
 		$cricketer = new Cricketer;
 
 		$cricketer->name = Input::get('name');
@@ -40,7 +50,7 @@ class CricketersController extends \BaseController {
 		$cricketer->shirt_number = Input::get('shirt_number');
 
 		$cricketer->save();
-
+		*/
 		return Redirect::route('cricketers.index');
 	}
 

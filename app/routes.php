@@ -30,6 +30,7 @@ Route::resource('cricketers', 'CricketersController');
 //
 //	return $user->email; 
 //}
+
 Route::get('/', function()
 {
 	// Using user all, find
@@ -70,8 +71,8 @@ Route::get('/', function()
 
     //$lala = Cricketer::where('number_of_sixes', '>', '470')->get();
     
-
-    return Cricketer::orderBy('number_of_sixes', 'desc')->get();
+	return View::make('cricketers.homepage');
+    //return Cricketer::orderBy('number_of_sixes', 'desc')->get();
 
     //return User::all();
 
